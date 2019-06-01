@@ -1,0 +1,30 @@
+{
+    "name": "xiaohuilam/laravel-wxapp-notification-channel",
+    "description": "Laravel package to enable wechat mini program template message notification as a channel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xiaohui.lam",
+            "email": "xiaohui.lam@aliyun.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.6",
+        "laravel/framework": ">=5.0",
+        "overtrue/laravel-wechat": ">=5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xiaohuilam\\Laravel\\WxappNotificationChannel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Xiaohuilam\\Laravel\\WxappNotificationChannel\\WxappNotificationServiceProvider"
+            ]
+        }
+    }
+}
