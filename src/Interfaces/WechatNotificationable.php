@@ -6,6 +6,7 @@ namespace Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces;
  *
  * @method string getTemplateMessagePath() 需要跳转到, 若不提供, 则表示此模板消息不可跳转
  * @method string getTemplateMessageEmphasisKeyword() 需要放大的词, 不提供则表示此消息不放大任何字段
+ * @method self receiver(\Illuminate\Foundation\Auth\User $user) 发送给
  */
 interface WechatNotificationable
 {

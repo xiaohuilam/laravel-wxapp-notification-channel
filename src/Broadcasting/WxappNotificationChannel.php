@@ -16,6 +16,10 @@ class WxappNotificationChannel
      */
     public function send(Formidable $notifiable, WechatNotificationable $notification)
     {
+        if (method_exists($notification, 'receiver')) {
+            $notification->receiver($notifiable);
+        }
+
         $openid = $notifiable->openid;
         $credential = $notifiable->popCredentialOrFail();
 
