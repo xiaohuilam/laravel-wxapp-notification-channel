@@ -58,7 +58,6 @@ class WechatTemplateTestNotification extends Notification implements WechatNotif
         // 可选类型
         // wechat-app: 小程序
         // wechat-offcial: 公众号
-        // wechat-uniform: 统一通知
         return ['wechat-app'];
     }
 
