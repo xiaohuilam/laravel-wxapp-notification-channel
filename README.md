@@ -38,14 +38,20 @@ WECHAT_MINI_PROGRAM_SECRET=#小程序的secret
 ### 定义消息模板
 
 新建 `app/Notifications/WechatTemplateTestNotification.php`
+
+根据不通类型走不同 notification 类
+>* **公众号模板通知**
+>* **小程序模板通知**
+
+**公众号模板通知**
 ```php
 <?php
 namespace App\Notifications;
 
 use Illuminate\Notifications\Notification;
-use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\WechatNotificationable;
+use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\WechatOfficialNotificationable;
 
-class WechatTemplateTestNotification extends Notification implements WechatNotificationable
+class WechatTemplateTestNotification extends Notification implements WechatOfficialNotificationable
 {
     /**
      * Get the notification's delivery channels.
@@ -55,9 +61,63 @@ class WechatTemplateTestNotification extends Notification implements WechatNotif
      */
     public function via($notifiable)
     {
-        // 可选类型
-        // wechat-app: 小程序
-        // wechat-offcial: 公众号
+        return ['wechat-official'];
+    }
+
+    /**
+     * 获取模板id
+     *
+     * @return string
+     */
+    public function getTemplateId()
+    {
+        return 'iL4c0FHJFIIUIDfNH-gMXgkGHRwlP-lvh1Emfl4d3pg';
+    }
+
+    /**
+     * 获取模板消息跳转链接
+     *
+     * @return string
+     */
+    public function getTemplateMessageUrl()
+    {
+        return '/app/order/detail?id=11';
+    }
+
+    /**
+     * 获取模板消息数据
+     *
+     * @return array
+     */
+    public function getTemplateMessageData()
+    {
+        return [
+            'keyword1' => '审核通过',
+            'keyword2' => 'ORDER-9112212',
+            'keyword3' => '点击查看订单详情',
+        ];
+    }
+}
+```
+
+**小程序模板通知**
+```php
+<?php
+namespace App\Notifications;
+
+use Illuminate\Notifications\Notification;
+use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\WechatAppNotificationable;
+
+class WechatTemplateTestNotification extends Notification implements WechatAppNotificationable
+{
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
         return ['wechat-app'];
     }
 
@@ -107,10 +167,11 @@ class WechatTemplateTestNotification extends Notification implements WechatNotif
 }
 ```
 
-### 记录 FormId
+### 如果是小程序，还需要开API来记录 FormId
 ```php
 use Xiaohuilam\Laravel\WxappNotificationChannel\Models\Formid;
 
+// ...
 $formid = request()->input('formid'); // 小程序前端post 过来的 formid
 
 $user = User::find(1);
