@@ -5,7 +5,10 @@ use Illuminate\Notifications\Notification;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\WechatNotificationable;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\Formidable;
 
-class WxappNotificationChannel
+/**
+ * 微信小程序模板消息通知通道
+ */
+class WechatAppNotificationChannel
 {
     /**
      * Send the given notification.
@@ -16,10 +19,6 @@ class WxappNotificationChannel
      */
     public function send(Formidable $notifiable, WechatNotificationable $notification)
     {
-        if (method_exists($notification, 'receiver')) {
-            $notification->receiver($notifiable);
-        }
-
         $openid = $notifiable->openid;
         $credential = $notifiable->popCredentialOrFail();
 

@@ -55,7 +55,11 @@ class WechatTemplateTestNotification extends Notification implements WechatNotif
      */
     public function via($notifiable)
     {
-        return ['wechat'];
+        // 可选类型
+        // wechat-app: 小程序
+        // wechat-offcial: 公众号
+        // wechat-uniform: 统一通知
+        return ['wechat-app'];
     }
 
     /**
