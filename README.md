@@ -1,4 +1,6 @@
 # Laravel 微信小程序模板消息通知
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxiaohuilam%2Flaravel-wxapp-notification-channel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxiaohuilam%2Flaravel-wxapp-notification-channel?ref=badge_shield)
+
 ---
 
 ## 安装
@@ -128,3 +130,6 @@ MIT
 
 ## 鸣谢
 - Overtrue's [laravel-easywechat](https://github.com/overtrue/laravel-wechat)
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxiaohuilam%2Flaravel-wxapp-notification-channel.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxiaohuilam%2Flaravel-wxapp-notification-channel?ref=badge_large)
