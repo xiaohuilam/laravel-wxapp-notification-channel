@@ -49,6 +49,7 @@ WECHAT_MINI_PROGRAM_SECRET=#小程序的secret
 namespace App\Notifications;
 
 use Illuminate\Notifications\Notification;
+use Xiaohuilam\Laravel\WxappNotificationChannel\Types\MiniprogramType;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\WechatOfficialNotificationable;
 
 class WechatTemplateTestNotification extends Notification implements WechatOfficialNotificationable
@@ -81,7 +82,17 @@ class WechatTemplateTestNotification extends Notification implements WechatOffic
      */
     public function getTemplateMessageUrl()
     {
-        return '/app/order/detail?id=11';
+        return 'https://www.baidu.com/';
+    }
+
+    /**
+     * 跳转到小程序， 与getTemplateMessageUrl二选一
+     *
+     * @return \Xiaohuilam\Laravel\WxappNotificationChannel\Types\MiniprogramType
+     */
+    public function miniprogram()
+    {
+        return new MiniprogramType('APPID...', 'PATH路径...');
     }
 
     /**
