@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.6",
         "laravel/framework": ">=5.0",
-        "overtrue/laravel-wechat": ">=2.0"
+        "xiaohuilam/easywechat-adpter": "*"
     },
     "autoload": {
         "psr-4": {
