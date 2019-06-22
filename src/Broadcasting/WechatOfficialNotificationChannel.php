@@ -34,10 +34,20 @@ class WechatOfficialNotificationChannel
             $message['miniprogram'] = $notification->miniprogram()->toArray();
         }
 
-        /**
-         * @var \EasyWeChat\OfficialAccount\Application $wechat
-         */
-        $wechat = app('wechat.official_account');
-        $wechat->template_message->send($message);
+        if (app()->isAlias('wechat.official_account')) {
+            /**
+             * @var \EasyWeChat\OfficialAccount\Application $wechat
+             */
+            $wechat = app('wechat.official_account');
+            $pusher = $wechat->template_message;
+        } else {
+            /**
+             * @var \EasyWeChat\Foundation\Application $wechat
+             */
+            $wechat = app('wechat');
+            $pusher = $wechat->notice;
+        }
+
+        return $pusher->send($message);
     }
 }
