@@ -26,6 +26,7 @@ class WechatOfficialNotificationChannel
             'template_id' => $notification->getTemplateId(),
             'data' => $notification->getTemplateMessageData(),
         ];
+
         if (method_exists($notification, 'getTemplateMessageUrl')) {
             $message['url'] = $notification->getTemplateMessageUrl();
         }
@@ -48,6 +49,11 @@ class WechatOfficialNotificationChannel
             $pusher = $wechat->notice;
         }
 
-        return $pusher->send($message);
+        $result = $pusher->send($message);
+        if (data_get($result, 'errcode') != 0) {
+            // log
+            logger()->error('WECHAT_OFFICIAL_NOTIFICATION_ERROR', ['result' => $result, 'message' => $message]);
+        }
+        return $result;
     }
 }
