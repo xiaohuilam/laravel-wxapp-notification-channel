@@ -2,7 +2,7 @@
 namespace Xiaohuilam\Laravel\WxappNotificationChannel\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Models\Formid;
 
 class DeleteExpiredFormid extends Command
