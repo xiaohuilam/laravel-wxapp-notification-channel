@@ -16,7 +16,7 @@ class WechatAppNotificationChannel
      * @param  WechatNotificationable|\Illuminate\Notifications\Notification $notification
      * @return void
      */
-    public function send(Notifiable $notifiable, $notification)
+    public function send($notifiable, $notification)
     {
         $openid = $notifiable->openid;
 
