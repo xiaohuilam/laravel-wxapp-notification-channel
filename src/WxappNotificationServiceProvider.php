@@ -18,7 +18,6 @@ class WxappNotificationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerChannel();
-        $this->registerMigration();
     }
 
     /**
@@ -65,20 +64,6 @@ class WxappNotificationServiceProvider extends ServiceProvider
         $dispatcher->extend('wechat-offcial', function (Application $app) {
             return $app->make(WechatOfficialNotificationChannel::class);
         });
-    }
-
-    /**
-     * 加载数据库迁移文件
-     *
-     * @return void
-     */
-    public function registerMigration()
-    {
-        if (!$this->app->runningInConsole()) {
-            return;
-        }
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
     }
 
     /**

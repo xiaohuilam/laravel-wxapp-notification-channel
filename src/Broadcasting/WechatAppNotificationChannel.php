@@ -1,9 +1,8 @@
 <?php
 namespace Xiaohuilam\Laravel\WxappNotificationChannel\Broadcasting;
 
-use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\WechatNotificationable;
-use Xiaohuilam\Laravel\WxappNotificationChannel\Interfaces\Formidable;
 
 /**
  * 微信小程序模板消息通知通道
@@ -13,23 +12,21 @@ class WechatAppNotificationChannel
     /**
      * Send the given notification.
      *
-     * @param  Formidable  $notifiable
+     * @param  Notifiable  $notifiable
      * @param  WechatNotificationable|\Illuminate\Notifications\Notification $notification
      * @return void
      */
-    public function send(Formidable $notifiable, WechatNotificationable $notification)
+    public function send(Notifiable $notifiable, $notification)
     {
         $openid = $notifiable->openid;
-        $credential = $notifiable->popCredentialOrFail();
 
-        if (!$openid || !$credential) {
+        if (!$openid) {
             return;
         }
 
         $message = [
             'touser' => $openid,
             'template_id' => $notification->getTemplateId(),
-            'form_id' => $credential->formid,
             'data' => $notification->getTemplateMessageData(),
         ];
         if (method_exists($notification, 'getTemplateMessagePath')) {
@@ -43,8 +40,6 @@ class WechatAppNotificationChannel
          * @var \EasyWeChat\MiniProgram\Application $wechat
          */
         $wechat = app('wechat.mini_program');
-        $wechat->template_message->send($message);
-
-        $credential->delete();
+        $wechat->subscribe_message->send($message);
     }
 }
