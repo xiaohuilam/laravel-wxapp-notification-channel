@@ -49,8 +49,8 @@ class WxappNotificationServiceProvider extends ServiceProvider
 
         /**
          * 小程序
-         * @link https://www.easywechat.com/docs/4.1/mini-program/template_message
-         * @link https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/template-message/templateMessage.send.html
+         * @link https://www.easywechat.com/docs/5.x/mini-program/subscribe_message
+         * @link https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
          */
         $dispatcher->extend('wechat-app', function (Application $app) {
             return $app->make(WechatAppNotificationChannel::class);
