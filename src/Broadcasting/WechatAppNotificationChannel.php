@@ -35,6 +35,9 @@ class WechatAppNotificationChannel
         if (method_exists($notification, 'getTemplateMessageEmphasisKeyword')) {
             $message['emphasis_keyword'] = $notification->getTemplateMessageEmphasisKeyword();
         }
+        if (method_exists($notification, 'getMiniprogramState')) {
+            $message['miniprogram_state'] = $notification->getMiniprogramState();
+        }
 
         /**
          * @var \EasyWeChat\MiniProgram\Application $wechat
