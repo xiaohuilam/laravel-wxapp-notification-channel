@@ -13,7 +13,7 @@ class WechatOfficialNotificationChannel
     /**
      * Send the given notification.
      *
-     * @param  Formidable  $notifiable
+     * @param  User  $notifiable
      * @param  WechatOfficialNotificationable|\Illuminate\Notifications\Notification $notification
      * @return void
      */

@@ -2,11 +2,8 @@
 namespace Xiaohuilam\Laravel\WxappNotificationChannel;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Console\Application as Artisan;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Notifications\Dispatcher;
-use Xiaohuilam\Laravel\WxappNotificationChannel\Console\Commands\DeleteExpiredFormid;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Broadcasting\WechatAppNotificationChannel;
 use Xiaohuilam\Laravel\WxappNotificationChannel\Broadcasting\WechatOfficialNotificationChannel;
 
@@ -18,14 +15,6 @@ class WxappNotificationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerChannel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function boot()
-    {
-        $this->bootCommand();
     }
 
     /**
@@ -63,31 +52,6 @@ class WxappNotificationServiceProvider extends ServiceProvider
          */
         $dispatcher->extend('wechat-offcial', function (Application $app) {
             return $app->make(WechatOfficialNotificationChannel::class);
-        });
-    }
-
-    /**
-     * 注册命令
-     *
-     * @return void
-     */
-    public function bootCommand()
-    {
-        if (!$this->app->runningInConsole()) {
-            return;
-        }
-
-        $this->app->booted(function () {
-            Artisan::starting(function (Artisan $artisan) {
-                $artisan->resolve(DeleteExpiredFormid::class);
-            });
-
-            /**
-             * @todo makes delete executing time to be configration
-             * @var Schedule $schedule
-             */
-            $schedule = $this->app->make(Schedule::class);
-            $schedule->command('formid:clear')->dailyAt('01:00');
         });
     }
 }
